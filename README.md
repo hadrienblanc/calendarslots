@@ -1,0 +1,3 @@
+# calendarslots
+
+:worker:
