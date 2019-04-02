@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-class Calendarslots
+require 'calendarslots/slot'
+
+module Calendarslots
   def self.hi
-    puts 'Hello world!'
+    'Hello world!'
   end
 end

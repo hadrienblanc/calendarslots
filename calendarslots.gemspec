@@ -6,7 +6,9 @@ Gem::Specification.new do |s|
  # s.description = 'Find the open slots in your calendar'
   s.authors     = ['Hadrien Blanc']
   s.email       = 'blanc.hadrien@gmail.com'
-  s.files       = ['lib/calendarslots.rb']
+  s.files       = [
+    'lib/calendarslots.rb',
+    'lib/calendarslots/slot.rb']
   s.homepage    = 'http://rubygems.org/gems/'
   s.license     = 'Nonstandard'
 end
