@@ -1,14 +1,24 @@
-Gem::Specification.new do |s|
-  s.name        = 'calendarslots'
-  s.version     = '0.0.0'
-  s.date        = '2010-04-28'
-  s.summary     = 'Find the open slots in your calendar'
- # s.description = 'Find the open slots in your calendar'
-  s.authors     = ['Hadrien Blanc']
-  s.email       = 'blanc.hadrien@gmail.com'
-  s.files       = [
-    'lib/calendarslots.rb',
+Gem::Specification.new do |spec|
+  spec.name        = 'calendarslots'
+  spec.version     = '0.0.0'
+  spec.date        = '2010-04-28'
+  spec.authors     = ['Hadrien Blanc']
+  spec.email       = 'blanc.hadrien@gmail.com'
+
+  spec.summary     = 'Find the open slots in your calendar'
+  spec.description = 'Find the open slots in your calendar, considering your configuration'
+
+  spec.files       = [
+    'lib/calendarslotspec.rb',
     'lib/calendarslots/slot.rb']
-  s.homepage    = 'http://rubygems.org/gems/'
-  s.license     = 'Nonstandard'
+  spec.homepage    = 'http://rubygemspec.org/gems/'
+  spec.license     = 'Nonstandard'
+  spec.add_dependency('activesupport', '~> 5.0', '>= 5.0.0.1')
+
+  spec.require_paths = ["lib"]
+
+
+  spec.add_development_dependency "bundler", "~> 2.0"
+  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "minitest", "~> 5.0"
 end
