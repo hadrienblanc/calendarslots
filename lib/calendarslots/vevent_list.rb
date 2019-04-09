@@ -37,7 +37,7 @@ module Calendarslots
     private
 
     def potential_vevent_end(datetime)
-      (datetime + @event_type.duration.minutes)
+      (datetime + @event_type.duration_minutes.minutes)
     end
   end
 end

@@ -8,7 +8,7 @@ module Calendarslots
 
     def generate_slot(datetime)
       Slot.new(datetime,
-               datetime + @event_type.duration.minutes,
+               datetime + @event_type.duration_minutes.minutes,
                slot_is_available?(datetime),
                @vevent_list.vevent_at_cursor)
     end
