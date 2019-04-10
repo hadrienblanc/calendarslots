@@ -14,7 +14,7 @@ class CalendarslotsTest < Minitest::Test
     available_times = nil
     taken_slots_data_list = nil
 
-    assert_equal [], Calendarslots.opened_slots_during(event_type, current_day, available_times, taken_slots_data_list)
+    assert_equal [], Calendarslots.opened_slots_during(available_times, taken_slots_data_list, nil)
   end
 
   def test_opened_slots_one
@@ -31,7 +31,8 @@ class CalendarslotsTest < Minitest::Test
     ]
     vevents_list = []
 
-    events = Calendarslots.opened_slots_during(current_day, available_times, vevents_list, options)
+    puts "no events"
+    events = Calendarslots.opened_slots_during(available_times, vevents_list, options)
 
     events.each do |ev|
       puts ev.print_out
@@ -60,9 +61,11 @@ class CalendarslotsTest < Minitest::Test
       ),
     ]
 
+
+    puts "events list : "
     puts vevents_list
 
-    events = Calendarslots.opened_slots_during(current_day, available_times, vevents_list, options)
+    events = Calendarslots.opened_slots_during(available_times, vevents_list, options)
 
     events.each do |ev|
       puts ev.print_out
@@ -90,10 +93,10 @@ class CalendarslotsTest < Minitest::Test
         end: ::DateTime.tomorrow.noon + 12.minutes,
       ),
     ]
-
+    puts "events list : "
     puts vevents_list
 
-    events = Calendarslots.opened_slots_during(current_day, available_times, vevents_list, options)
+    events = Calendarslots.opened_slots_during(available_times, vevents_list, options)
 
     assert events.size.positive?
   end
@@ -124,7 +127,53 @@ class CalendarslotsTest < Minitest::Test
 
     puts vevents_list
 
-    events = Calendarslots.opened_slots_during(current_day, available_times, vevents_list, options)
+    events = Calendarslots.opened_slots_during(available_times, vevents_list, options)
+
+    events.each do |ev|
+      puts ev.print_out
+    end
+    puts "--" * 10
+    assert events.size.positive?
+  end
+
+  def test_opened_slots_random_data
+    puts "[random test]"
+    puts "[random test]"
+    puts "[random test]"
+    
+    options = OpenStruct.new
+    options.duration_minutes = 10
+    options.time_optimization = true
+
+    current_day = DateTime.tomorrow
+
+    available_times = [
+      {
+        datetime_start: ::DateTime.tomorrow.noon,
+        datetime_end: ::DateTime.tomorrow.noon + 1.hours
+      }
+    ]
+
+    vevents_list = []
+    i_vevents = rand(10) + 2
+    timeline = 0
+    event_duration = 0
+    i = 0
+    while i < i_vevents
+      event_duration = rand(30) + 1
+      event_space = rand(30) + 1
+      vevents_list << OpenStruct.new(
+        start: ::DateTime.tomorrow.noon + (event_space + timeline).minutes,
+        end: ::DateTime.tomorrow.noon + (event_space + timeline + event_duration).minutes,
+      )
+      timeline += event_duration + event_space
+
+      i += 1
+    end
+  
+    puts vevents_list
+
+    events = Calendarslots.opened_slots_during(available_times, vevents_list, options)
 
     events.each do |ev|
       puts ev.print_out

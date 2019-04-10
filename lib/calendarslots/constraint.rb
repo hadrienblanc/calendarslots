@@ -1,7 +1,6 @@
 module Calendarslots
   class Constraint
-    def initialize(date_range, event_type, vevent_list_data = [], calendar_config = nil)
-      @date_range = date_range
+    def initialize(event_type, vevent_list_data = [], calendar_config = nil)
       @event_type = event_type
       @vevent_list = VeventList.new(event_type, vevent_list_data)
     end

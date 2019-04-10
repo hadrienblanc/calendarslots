@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name        = 'calendarslots'
-  spec.version     = '0.0.1'
+  spec.version     = '0.0.2'
   spec.date        = '2019-04-01'
   spec.authors     = ['Hadrien Blanc']
   spec.email       = 'blanc.hadrien@gmail.com'
