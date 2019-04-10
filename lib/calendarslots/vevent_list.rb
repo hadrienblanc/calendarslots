@@ -1,10 +1,10 @@
 module Calendarslots
   class VeventList
-    def initialize(event_type, vevent_list_data)
+    def initialize(options, vevent_list_data)
       @vevent_list = vevent_list_data
       @vevent_cursor = 0
       @vevent_size = @vevent_list.size
-      @event_type = event_type
+      @options = options
     end
 
     def move_the_cursor_after(datetime)
@@ -30,6 +30,22 @@ module Calendarslots
       still_has_vevents && vevent_at_cursor_overlaps?(datetime)
     end
 
+    def space_at?(datetime)
+      return true if !still_has_vevents
+
+      move_the_cursor_after(datetime)
+      space_at_with_capacity?(datetime)
+    end
+
+    def space_at_with_capacity(datetime)
+      if @options.capacity
+        # on compte les overlaps sur les prochains de la liste,
+        # et si c'est < capacity, ya de la place
+      else
+        !vevent_at_cursor_overlaps?(datetime)
+      end
+    end
+
     def vevent_at_cursor_overlaps?(datetime)
       datetime < vevent_at_cursor.end && vevent_at_cursor.start < potential_vevent_end(datetime)
     end
@@ -37,7 +53,7 @@ module Calendarslots
     private
 
     def potential_vevent_end(datetime)
-      (datetime + @event_type.duration_minutes.minutes)
+      (datetime + @options.duration_minutes.minutes)
     end
   end
 end
