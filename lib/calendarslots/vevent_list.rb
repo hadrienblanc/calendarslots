@@ -13,16 +13,22 @@ module Calendarslots
       end
     end
 
-    def still_has_vevents
-      @vevent_cursor < @vevent_size
+    def still_has_vevents(offset = 0)
+      @vevent_cursor + offset < @vevent_size
     end
 
     def vevent_at_cursor_is_in_the_past(datetime)
       vevent_at_cursor.end <= datetime
     end
 
-    def vevent_at_cursor
+    def vevent_at_cursor()
       @vevent_list[@vevent_cursor]
+    end
+
+    def vevent_at_cursor_offset(offset)
+      return nil if (@vevent_cursor + offset) > @vevent_size
+
+      @vevent_list[@vevent_cursor + offset]
     end
 
     def overlaps?(datetime)
@@ -34,16 +40,28 @@ module Calendarslots
       return true if !still_has_vevents
 
       move_the_cursor_after(datetime)
-      space_at_with_capacity?(datetime)
+      !still_has_vevents || space_at_with_capacity?(datetime)
     end
 
-    def space_at_with_capacity(datetime)
+    def space_at_with_capacity?(datetime)
+      puts "space_at_with_capacity MAN"
       if @options.capacity
-        # on compte les overlaps sur les prochains de la liste,
-        # et si c'est < capacity, ya de la place
+        offset = 0
+        overlap_count = 0
+        while offset < @options.capacity
+          if !still_has_vevents(offset) || !vevent_at_cursor_offset_overlaps?(datetime, offset)#  || !still_has_vevents(offset)
+            return true
+          end
+          offset += 1
+        end
+        return false
       else
         !vevent_at_cursor_overlaps?(datetime)
       end
+    end
+
+    def vevent_at_cursor_offset_overlaps?(datetime, offset)
+      datetime < vevent_at_cursor_offset(offset).end && vevent_at_cursor_offset(offset).start < potential_vevent_end(datetime)
     end
 
     def vevent_at_cursor_overlaps?(datetime)
