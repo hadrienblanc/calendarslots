@@ -22,7 +22,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Options 
+
+- duration_minutes
+- capacity
+
+### Options todo 
+
+- time before rendez-vous
+- time after rendez-vous
 
 ## Development Install
 
