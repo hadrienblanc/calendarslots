@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Calendarslots
   class VeventList
     def initialize(options, vevent_list_data)

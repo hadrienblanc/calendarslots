@@ -24,13 +24,13 @@ Or install it yourself as:
 
 ### Options 
 
-- duration_minutes
-- capacity
+- duration_minutes : duration of the slot for the wanted meeting
+- capacity : the number of meeting potentially taken in the availability
+- offset_end : time before a meeting 
+- offset_start : time after a meeting
 
-### Options todo 
-
-- time before rendez-vous
-- time after rendez-vous
+### roadmap options
+- weight of a meeting in the capacity (every meeting is currently one)
 
 ## Development Install
 

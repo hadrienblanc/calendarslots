@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'date'
 
 require 'calendarslots/slot'
@@ -30,8 +31,8 @@ module Calendarslots
       puts "- a_end : #{available_time[:datetime_end]}"
       while current_day < available_time[:datetime_end]
         slot = constraint.generate_slot(current_day)
-        day_slots << slot
-        current_day = slot.end
+        day_slots << slot if (slot.end + constraint.offset_end) <= available_time[:datetime_end]
+        current_day = (slot.end + constraint.offset_end)
 
 #        if options.time_optimization && slot.vevent
  #         current_day = slot.vevent.end
