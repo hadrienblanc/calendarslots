@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Calendarslots
   class VeventList
     def initialize(options, vevent_list_data)
@@ -20,7 +18,7 @@ module Calendarslots
     end
 
     def vevent_at_cursor_is_in_the_past(datetime)
-      vevent_at_cursor.end <= datetime
+      vevent_at_cursor.end + @options.offset_end <= datetime
     end
 
     def vevent_at_cursor()
@@ -51,7 +49,7 @@ module Calendarslots
         offset = 0
         overlap_count = 0
         while offset < @options.capacity
-          if !still_has_vevents(offset) || !vevent_at_cursor_offset_overlaps?(datetime, offset)#  || !still_has_vevents(offset)
+          if !still_has_vevents(offset) || !vevent_at_cursor_offset_overlaps?(datetime, offset)
             return true
           end
           offset += 1
@@ -63,17 +61,19 @@ module Calendarslots
     end
 
     def vevent_at_cursor_offset_overlaps?(datetime, offset)
-      datetime < vevent_at_cursor_offset(offset).end && vevent_at_cursor_offset(offset).start < potential_vevent_end(datetime)
+      datetime < vevent_at_cursor_offset(offset).end + @options.offset_end \
+      && vevent_at_cursor_offset(offset).start < potential_vevent_end(datetime)
     end
 
     def vevent_at_cursor_overlaps?(datetime)
-      datetime < vevent_at_cursor.end && vevent_at_cursor.start < potential_vevent_end(datetime)
+      datetime < (vevent_at_cursor.end + @options.offset_end) \
+        && vevent_at_cursor.start < potential_vevent_end(datetime)
     end
 
     private
 
     def potential_vevent_end(datetime)
-      (datetime + @options.duration_minutes.minutes)
+      (datetime + @options.offset_start + @options.duration_minutes.minutes + @options.offset_end)
     end
   end
 end

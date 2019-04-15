@@ -19,6 +19,8 @@ class CalendarslotsTest < Minitest::Test
 
   def test_opened_slots_one
     options = OpenStruct.new
+    options.offset_end = 0
+    options.offset_start = 0
     options.duration_minutes = 10
     options.time_optimization = false
     current_day = DateTime.tomorrow
@@ -43,6 +45,8 @@ class CalendarslotsTest < Minitest::Test
 
   def test_opened_slots_with_bigger_event
     options = OpenStruct.new
+    options.offset_end = 0
+    options.offset_start = 0
     options.duration_minutes = 10
     options.time_optimization = false
 
@@ -76,6 +80,8 @@ class CalendarslotsTest < Minitest::Test
 
   def test_opened_slots_with_smaller_event
     options = OpenStruct.new
+    options.offset_end = 0
+    options.offset_start = 0
     options.duration_minutes = 10
     options.time_optimization = false
 
@@ -103,6 +109,9 @@ class CalendarslotsTest < Minitest::Test
 
   def test_opened_slots_with_two_event
     options = OpenStruct.new
+    options.offset_end = 0
+    options.offset_start = 0
+
     options.duration_minutes = 10
     options.time_optimization = true
 
@@ -142,6 +151,9 @@ class CalendarslotsTest < Minitest::Test
     puts "[random test]"
     
     options = OpenStruct.new
+    options.offset_end = 0
+    options.offset_start = 0
+
     options.duration_minutes = 10
     options.time_optimization = true
 

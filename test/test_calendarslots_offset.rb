@@ -9,6 +9,9 @@ class CalendarslotsOffsetTest < Minitest::Test
 
   def test_opened_slots_with_offset_start
     options = OpenStruct.new
+    options.offset_end = 0
+    options.offset_start = 0
+
     options.duration_minutes = 10
     options.time_optimization = false
     options.offset_start = 5
@@ -43,6 +46,9 @@ class CalendarslotsOffsetTest < Minitest::Test
 
   def test_opened_slots_with_offset_end
     options = OpenStruct.new
+    options.offset_end = 0
+    options.offset_start = 0
+
     options.duration_minutes = 10
     options.time_optimization = false
     options.offset_end = 5
@@ -79,7 +85,7 @@ class CalendarslotsOffsetTest < Minitest::Test
     options = OpenStruct.new
     options.duration_minutes = 10
     options.time_optimization = false
-    options.offset_start = 4
+    options.offset_start = 5
     options.offset_end = 3
 
     current_day = DateTime.tomorrow
@@ -92,8 +98,8 @@ class CalendarslotsOffsetTest < Minitest::Test
     ]
     vevents_list = [
       OpenStruct.new(
-        start: ::DateTime.tomorrow.noon + 9.minutes,
-        end: ::DateTime.tomorrow.noon + 12.minutes,
+        start: ::DateTime.tomorrow.noon + 10.minutes,
+        end: ::DateTime.tomorrow.noon + 30.minutes,
       ),
     ]
     puts "OFFSET START 4 AND END 3 -- events list : "

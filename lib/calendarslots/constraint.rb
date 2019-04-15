@@ -9,7 +9,7 @@ module Calendarslots
 
     def generate_slot(datetime)
       Slot.new(datetime + offset_start,
-               datetime + offset_start + @options.duration_minutes.minutes,
+               datetime + offset_start + @options.duration_minutes.minutes + offset_end,
                slot_is_available?(datetime),
                @vevent_list.vevent_at_cursor)
     end

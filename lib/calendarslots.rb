@@ -22,6 +22,9 @@ module Calendarslots
       return []
     end
 
+    options.offset_end = 0 if options.offset_end.nil? 
+    options.offset_start = 0 if options.offset_start.nil? 
+
     constraint = Constraint.new(options, taken_slots_data_list)
 
     day_slots = []
