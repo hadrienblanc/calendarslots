@@ -2,12 +2,7 @@ require 'minitest/autorun'
 require 'calendarslots'
 require 'ostruct'
 
-
 class CalendarslotsCapacityTest < Minitest::Test
-  def test_english_hello
-    assert_equal 'Hello world!', Calendarslots.hello
-  end
-
   def test_opened_slots_with_free_one_on_two_capacity
 
     puts "[capacity start]"

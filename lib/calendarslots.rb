@@ -11,14 +11,8 @@ require 'active_support/time'
 # This module is the main module of the gem
 #
 module Calendarslots
-  def self.hello
-    'Hello world!'
-  end
-
-  #
-  # option : duration_minutes 
   def self.opened_slots_during(available_times, taken_slots_data_list, options)
-    if available_times.nil? || available_times.empty? # || current_day.past?
+    if available_times.nil? || available_times.empty?
       return []
     end
 
@@ -37,17 +31,13 @@ module Calendarslots
         day_slots << slot if (slot.end + constraint.offset_end) <= available_time[:datetime_end]
         current_day = (slot.end + constraint.offset_end)
 
+        # R&D part
 #        if options.time_optimization && slot.vevent
- #         current_day = slot.vevent.end
- #       else
-  #        current_day = slot.end
-   #     end
-        # à la suite : rendez-vous glissant. (on prends la première disponibilité possible, a la fin de l'indispo)
-        # todo : a mettre dans Constraint pour ne pas partager le vevent courrant de l'algo.
-        # todo 2 : optionnel
-#        current_day = slot.vevent.end if options.time_optimization && slot.vevent && !slot.available && slot.vevent.end < current_day  
-        # | en cas de plusieurs vevents il faudra prendre le dernier moment où il y a 
-        # le maximum de vevent. (comme à tel moment)
+#         current_day = slot.vevent.end
+#       else
+#        current_day = slot.end
+#     end
+# maybe :        current_day = slot.vevent.end if options.time_optimization && slot.vevent && !slot.available && slot.vevent.end < current_day  
       end
     end
     day_slots

@@ -2,12 +2,7 @@ require 'minitest/autorun'
 require 'calendarslots'
 require 'ostruct'
 
-
 class CalendarslotsTest < Minitest::Test
-  def test_english_hello
-    assert_equal 'Hello world!', Calendarslots.hello
-  end
-
   def test_opened_slots_empty_parameters
     event_type = nil
     current_day = nil

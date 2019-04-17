@@ -3,10 +3,6 @@ require 'calendarslots'
 require 'ostruct'
 
 class CalendarslotsOffsetTest < Minitest::Test
-  def test_english_hello
-    assert_equal 'Hello world!', Calendarslots.hello
-  end
-
   def test_opened_slots_with_offset_start
     options = OpenStruct.new
     options.offset_end = 0
@@ -26,8 +22,8 @@ class CalendarslotsOffsetTest < Minitest::Test
     ]
     vevents_list = [
       OpenStruct.new(
-        start: ::DateTime.tomorrow.noon + 9.minutes,
-        end: ::DateTime.tomorrow.noon + 12.minutes,
+        start: ::DateTime.tomorrow.noon + 10.minutes,
+        end: ::DateTime.tomorrow.noon + 30.minutes,
       ),
     ]
     puts "OFFSET start -- events list : "
@@ -49,7 +45,7 @@ class CalendarslotsOffsetTest < Minitest::Test
     options.offset_end = 0
     options.offset_start = 0
 
-    options.duration_minutes = 10
+    options.duration_minutes = 20
     options.time_optimization = false
     options.offset_end = 5
 
@@ -63,8 +59,8 @@ class CalendarslotsOffsetTest < Minitest::Test
     ]
     vevents_list = [
       OpenStruct.new(
-        start: ::DateTime.tomorrow.noon + 9.minutes,
-        end: ::DateTime.tomorrow.noon + 12.minutes,
+        start: ::DateTime.tomorrow.noon + 10.minutes,
+        end: ::DateTime.tomorrow.noon + 30.minutes,
       ),
     ]
     puts "OFFSET END -- events list : "

@@ -44,7 +44,6 @@ module Calendarslots
     end
 
     def space_at_with_capacity?(datetime)
-      puts "space_at_with_capacity MAN"
       if @options.capacity
         offset = 0
         overlap_count = 0

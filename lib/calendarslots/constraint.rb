@@ -16,12 +16,10 @@ module Calendarslots
 
     def slot_is_available?(datetime)
       datetime.future? \
-        && we_have_space_at_this_time(datetime) #\
-        #&& booking_range?(datetime)
+        && we_have_space_at_this_time(datetime)
     end
 
     def we_have_space_at_this_time(datetime)
-     # !@vevent_list.overlaps?(datetime)
       @vevent_list.space_at?(datetime)
     end
 
@@ -36,9 +34,5 @@ module Calendarslots
 
       @options.offset_end.minutes
     end
-
-#    def booking_range?(datetime) # if we still are ok to book (exemple : only 15 days ) hour_to_book_before..until_when_people_can_book
-#      (@options.booking_range).cover?(datetime)
-#    end
   end
 end
