@@ -24,13 +24,13 @@ module Calendarslots
     end
 
     def offset_start
-      return 0 unless @options.offset_start
+      return 0 unless @options.offset_start.minutes
 
       @options.offset_start.minutes
     end
 
     def offset_end
-      return 0 unless @options.offset_end
+      return 0 unless @options.offset_end.minutes
 
       @options.offset_end.minutes
     end
