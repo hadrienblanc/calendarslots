@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
     'lib/calendarslots/slot.rb']
   spec.homepage    = 'http://rubygemspec.org/gems/'
   spec.license     = 'Nonstandard'
-  spec.add_dependency('activesupport', '>= 5.0.0.1', '< 7')
+  spec.add_dependency('activesupport', '>= 5.0.0.1', '< 8')
 
   spec.require_paths = ["lib"]
 
